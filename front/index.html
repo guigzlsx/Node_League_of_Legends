@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Champions</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Champions:</h1>
+    <div id="champions">Loading...</div>
+
+    <h2>Create a new champion:</h2>
+    <form id="create-form">
+      <label for="create-name">Name:</label>
+      <input id="create-name" type="text" required />
+      <label for="create-type">Type:</label>
+      <input id="create-type" type="text" required />
+      <button type="submit">Create</button>
+    </form>
+
+    <script>
+      const apiURL = "http://localhost:3000/champions";
+
+      function loadChampions() {
+        fetch(apiURL)
+          .then((response) => response.json())
+          .then((champions) => {
+            const championsDiv = document.getElementById("champions");
+            championsDiv.textContent = ""; // Clear the loading text
+            for (let champion of champions) {
+              const championDiv = document.createElement("div");
+              championDiv.className = "champion";
+              championDiv.textContent = `Name: ${champion.name}, Type: ${champion.type}`;
+
+              const deleteButton = document.createElement("button");
+              deleteButton.textContent = "Delete";
+              deleteButton.addEventListener("click", function () {
+                deleteChampion(champion.id);
+              });
+              championDiv.appendChild(deleteButton);
+
+              const updateButton = document.createElement("button");
+              updateButton.textContent = "Update";
+              updateButton.addEventListener("click", function () {
+                updateChampion(champion.id);
+              });
+              championDiv.appendChild(updateButton);
+
+              championsDiv.appendChild(championDiv);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data: ", error);
+          });
+      }
+
+      function deleteChampion(id) {
+        fetch(`${apiURL}/${id}`, {
+          method: "DELETE",
+        })
+          .then(() => {
+            loadChampions();
+          })
+          .catch((error) => {
+            console.error("Error deleting champion: ", error);
+          });
+      }
+
+      function updateChampion(id) {
+        const newName = prompt("Enter new name");
+        const newType = prompt("Enter new type");
+        fetch(`${apiURL}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: newName,
+            type: newType,
+          }),
+        })
+          .then(() => {
+            loadChampions();
+          })
+          .catch((error) => {
+            console.error("Error updating champion: ", error);
+          });
+      }
+
+      loadChampions();
+    </script>
+  </body>
+</html>
