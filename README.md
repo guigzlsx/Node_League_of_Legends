@@ -1,6 +1,6 @@
-# 🏆 Champion Manager
+# 🏆 League of Legends
 
-Champion Manager est une application web simple pour gérer une liste de champions. Vous pouvez ajouter, supprimer et mettre à jour des champions.
+League of Legends Manager est une application web simple pour gérer une liste de champions. Vous pouvez ajouter, supprimer et mettre à jour des champions.
 
 ## 🚀 Installation
 
@@ -20,12 +20,11 @@ Pour mettre à jour un champion, cliquez sur le bouton "Update" sous le champion
 - HTML
 - CSS
 - JavaScript
+- -Node.js
 - Fetch API
 
-## 🤝 Contribution
-
-Les contributions sont les bienvenues. Veuillez ouvrir une issue ou une pull request pour toute contribution.
 
 ## 📄 Licence
 
 Ce projet est sous licence MIT.
+Le Saux Guillaume
