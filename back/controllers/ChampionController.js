@@ -37,7 +37,7 @@ const createChampion = (req, res) => {
     .create({
       data: {
         name: champion.name,
-        type: champion.type, // Ajoutez cette ligne
+        type: champion.type, 
       },
     })
     .then((champion) => {
@@ -59,7 +59,7 @@ const updateChampion = (req, res) => {
       },
       data: {
         name: champion.name,
-        type: champion.type, // Ajoutez cette ligne
+        type: champion.type, 
       },
     })
     .then((champion) => {
